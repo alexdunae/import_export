@@ -1,4 +1,4 @@
-<h3>Select a channel to export</h3>
+<h3>Select a channel for export</h3>
 
 <?php echo form_open( $form_action ); ?>
 
@@ -9,7 +9,9 @@
 <?php endforeach; ?>
 	</select>
 
-	<input type="submit" value="Export in CSV format" class="submit" />
+	<?php echo form_submit(array('name' => 'submit', 'value' => 'Export in CSV format', 'class' => 'submit'));?>
 </p>
+
+
 
 <?php echo form_close();
