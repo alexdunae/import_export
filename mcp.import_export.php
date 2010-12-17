@@ -54,6 +54,7 @@
 			}
 
 			$fields = $this->_get_field_list($channel->field_group);
+			$field_count = count($fields);
 
 			$this->EE->db->select('t.*, d.*');
 			$this->EE->db->from('channel_titles AS t, channel_data AS d');
@@ -81,12 +82,19 @@
 					$row[] = isset($entry[$db]) ? $entry[$db] : '';
 				}
 
+				// sanity check
+				if (count($row) !== $field_count)
+				{
+					fwrite($out, "ERROR: incorrect number of fields in row " . count($entries));
+					fclose($out);
+					exit;
+				}
 				fputcsv($out, $row);
 				$entries[] = $row;				
 			}
 
 			fclose($out);
-			exit(1);			
+			exit;
 		}
 	
 		/**
